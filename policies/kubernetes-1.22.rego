@@ -162,5 +162,9 @@ _deny = msg {
   msg := sprintf("%s/%s: The certificates.k8s.io/v1beta1 API version of CertificateSigningRequest is no longer served as of v1.22. Migrate manifests and API clients to use the certificates.k8s.io/v1 API version, available since v1.19.", [input.kind, input.metadata.name])
 }
 
-
+_deny = msg {
+  input.apiVersion == "networking.k8s.io/v1beta1"
+  input.kind == "Ingress"
+  msg := sprintf("%s/%s: The certificates.k8s.io/v1beta1 API version of CertificateSigningRequest is no longer served as of v1.22. Migrate manifests and API clients to use the certificates.k8s.io/v1 API version, available since v1.19.", [input.kind, input.metadata.name])
+}
 
