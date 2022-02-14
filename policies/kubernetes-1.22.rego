@@ -96,7 +96,7 @@ _deny = msg {
 }
 
 # The autoscaling/v2beta1 version is deprecated in 1.19. Migrate to use autoscaling/v2beta2 instead
-_warn = msg {
+_deny = msg {
   input.apiVersion == "autoscaling/v2beta1"
   msg := sprintf("%s/%s: API autoscaling/v2beta1 is deprecated in Kubernetes 1.19, use autoscaling/v2beta2 instead.", [input.kind, input.metadata.name])
 }
