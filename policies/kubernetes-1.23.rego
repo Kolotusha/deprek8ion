@@ -13,6 +13,19 @@ warn[msg] {
   msg := _warn
 }
 
+deny[msg] {
+  input.apiVersion == "v1"
+  input.kind == "List"
+  obj := input.items[_]
+  msg := _deny with input as obj
+}
+
+deny[msg] {
+  input.apiVersion != "v1"
+  input.kind != "List"
+  msg := _deny
+}
+
 # new rules for 1.23
 
 _warn = msg {
