@@ -1,16 +1,16 @@
 package main
 
-warn[msg] {
+deny[msg] {
   input.apiVersion == "v1"
   input.kind == "List"
   obj := input.items[_]
-  msg := _warn with input as obj
+  msg := _deny with input as obj
 }
 
-warn[msg] {
+deny[msg] {
   input.apiVersion != "v1"
   input.kind != "List"
-  msg := _warn
+  msg := _deny
 }
 
 #from 1.16 -
