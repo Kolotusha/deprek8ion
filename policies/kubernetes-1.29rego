@@ -16,7 +16,8 @@ deny[msg] {
 # new rules for 1.29
 
 _deny = msg {
-  input.apiVersion == ""
-  input.kind == "CSIStorageCapacity"
- msg := sprintf("%s/%s: The storage.k8s.io/v1beta1 API version of CSIStorageCapacity will no longer be served in v1.27.", [input.kind, input.metadata.name])
+  resources := ["FlowSchema", "PriorityLevelConfiguration"]
+  input.apiVersion == "flowcontrol.apiserver.k8s.io/v1beta2"
+  input.kind == resources[_]
+  msg := sprintf("%s/%s: The flowcontrol.apiserver.k8s.io/v1beta1 API version of FlowSchema and PriorityLevelConfiguration is no longer served as of v1.29. flowcontrol.apiserver.k8s.io/v1 API version, available since v1.29.", [input.kind, input.metadata.name, input.kind])
 }
